@@ -1,8 +1,9 @@
 package devfon;
 
-import devfon.entity.Item;
-import devfon.entity.enums.PriorityType;
-import devfon.repository.ItemRepository;
+import devfon.rest.entity.Item;
+import devfon.rest.entity.enums.FinishedType;
+import devfon.rest.entity.enums.PriorityType;
+import devfon.rest.repository.ItemRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,11 +23,11 @@ public class TodoApplication {
         return (args) -> {
             LongStream.rangeClosed(1, 5).forEach(index ->
                     itemRepository.save(Item.builder()
-                            .id(index)
                             .title("할 일" + index)
                             .content("콘텐츠" + index)
-                            .priorityType(PriorityType.high)
+                            .priority(PriorityType.high)
                             .deadline("20181111")
+                            .finished(FinishedType.ING)
                             .build())
             );
         };

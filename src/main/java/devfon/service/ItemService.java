@@ -1,10 +1,11 @@
 package devfon.service;
 
-import devfon.entity.Item;
-import devfon.repository.ItemRepository;
+import devfon.rest.entity.Item;
+import devfon.rest.repository.ItemRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ItemService {
@@ -15,8 +16,9 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
-    public List<Item> findItemList() {
-        return itemRepository.findAll();
+    public Page<Item> findItemList(Pageable pageable) {
+        pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize());
+        return itemRepository.findAll(pageable);
     }
 
     public Item findItemById(Long id) {

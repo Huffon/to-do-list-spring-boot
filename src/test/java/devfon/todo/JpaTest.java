@@ -1,8 +1,9 @@
 package devfon.todo;
 
-import devfon.entity.Item;
-import devfon.entity.enums.PriorityType;
-import devfon.repository.ItemRepository;
+import devfon.rest.entity.Item;
+import devfon.rest.entity.enums.FinishedType;
+import devfon.rest.entity.enums.PriorityType;
+import devfon.rest.repository.ItemRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,10 +27,10 @@ public class JpaTest {
     public void init() {
         Item item = itemRepository.save(Item.builder()
                 .title("운동하기")
-                .priorityType(PriorityType.high)
+                .priority(PriorityType.high)
                 .content("윗몸일으키기")
                 .deadline("20181101")
-                .finished(false)
+                .finished(FinishedType.ING)
                 .build());
     }
 

@@ -1,6 +1,7 @@
-package devfon.entity;
+package devfon.rest.entity;
 
-import devfon.entity.enums.PriorityType;
+import devfon.rest.entity.enums.FinishedType;
+import devfon.rest.entity.enums.PriorityType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,19 +24,27 @@ public class Item implements Serializable {
     private String content;
     @Column
     @Enumerated(EnumType.STRING)
-    private PriorityType priorityType;
+    private PriorityType priority;
     @Column
     private String deadline;
     @Column
-    private boolean finished;
+    @Enumerated(EnumType.STRING)
+    private FinishedType finished;
 
     @Builder
-    public Item(Long id, String title, String content, PriorityType priorityType, String deadline, boolean finished) {
-        this.id = id;
+    public Item(String title, String content, PriorityType priority, String deadline, FinishedType finished) {
         this.title = title;
-        this.priorityType = priorityType;
         this.content = content;
+        this.priority = priority;
         this.deadline = deadline;
         this.finished = finished;
+    }
+
+    public void update(Item item) {
+        this.title = item.getTitle();
+        this.content = item.getContent();
+        this.priority = item.getPriority();
+        this.deadline = item.getDeadline();
+        this.finished = item.getFinished();
     }
 }

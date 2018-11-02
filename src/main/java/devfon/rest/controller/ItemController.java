@@ -1,4 +1,4 @@
-package devfon.controller;
+package devfon.rest.controller;
 
 import devfon.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +29,10 @@ public class ItemController {
 
     @GetMapping("/list")
     public String list(
+            @PageableDefault Pageable pageable,
             Model model
     ) {
-        model.addAttribute("itemList", itemService.findItemList());
+        model.addAttribute("itemList", itemService.findItemList(pageable));
         return "/item/list";
     }
 }
