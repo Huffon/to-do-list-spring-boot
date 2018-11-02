@@ -29,14 +29,11 @@
             </td>
         </tr>
         <tr>
-            <th style="padding:13px 0 0 15px">완료 설정</th>
+            <th style="padding:13px 0 0 15px">완료 여부</th>
             <td>
                 <div class="pull-left">
-                    <select class="form-control input-sm" id="item_finished">
-                        <option>---완료---</option>
-                        <option th:value="ING" th:selected="${item?.finished?.name() == 'ING'}">미완</option>
-                        <option th:value="FIM" th:selected="${item?.finished?.name() == 'FIM'}">완료</option>
-                    </select>
+                    <input type="text" class="form-control input-sm" id="item_finished"
+                        readonly="readonly" th:value="${item.finished} ? '완료' : '미완'"/>
                 </div>
             </td>
         </tr>
@@ -53,7 +50,7 @@
             </td>
         </tr>
         <tr>
-            <th style="padding:13px 0 0 15px;">마감기한</th>
+            <th style="padding:13px 0 0 15px;">마감기한 (optional)</th>
             <td><input id="item_deadline" type="text" class="col-md-1 form-control input-sm"
                        th:value="${item?.deadline}"></td>
         </tr>
@@ -68,7 +65,9 @@
     <div class="pull-right">
         <button th:if="!${item?.id}" type="button" class="btn btn-primary"
                 id="insert">저장</button>
-        <button th:if="${item?.id}" type="button" class="btn btn-info"
+        <button th:if="${item?.id != null and item?.finished == 0}" type="button" class="btn btn-success"
+                id="finish">완료</button>
+        <button th:if="${item?.id != null and item?.finished == 0}" type="button" class="btn btn-info"
                 id="update">수정</button>
         <button th:if="${item?.id}" type="button" class="btn btn-danger"
                 id="delete">삭제</button>
@@ -82,8 +81,7 @@
                 title: $('#item_title').val(),
                 content: $('#item_content').val(),
                 priority: $('#item_priority option:selected').val(),
-                deadline: $('#item_deadline').val(),
-                finished: $('#item_finished option:selected').val()
+                deadline: $('#item_deadline').val()
              });
              $.ajax({
                 url: "http://localhost:8081/api/items",
@@ -108,7 +106,7 @@
                 content: $('#item_content').val(),
                 priority: $('#item_priority option:selected').val(),
                 deadline: $('#item_deadline').val(),
-                finished: $('#item_finished option:selected').val()
+                finished: 0
              });
              $.ajax({
                 url: "http://localhost:8081/api/items/" + $('#item_id').val(),
@@ -122,6 +120,29 @@
                 },
                 error: function() {
                     alert('수정 실패!');
+                }
+             });
+        });
+        $('#finish').click(function() {
+            var jsonData = JSON.stringify({
+                title: $('#item_title').val(),
+                content: $('#item_content').val(),
+                priority: $('#item_priority option:selected').val(),
+                deadline: $('#item_deadline').val(),
+                finished: 1
+             });
+             $.ajax({
+                url: "http://localhost:8081/api/items/" + $('#item_id').val(),
+                type: "PUT",
+                data: jsonData,
+                contentType: "application/json",
+                dataType: "json",
+                success: function() {
+                    alert('완료 성공!');
+                    location.href = '/item/list';
+                },
+                error: function() {
+                    alert('완료 실패!');
                 }
              });
         });

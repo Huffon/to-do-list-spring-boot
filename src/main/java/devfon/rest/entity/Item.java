@@ -1,6 +1,5 @@
 package devfon.rest.entity;
 
-import devfon.rest.entity.enums.FinishedType;
 import devfon.rest.entity.enums.PriorityType;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,17 +25,17 @@ public class Item implements Serializable {
     @Enumerated(EnumType.STRING)
     private PriorityType priority;
     @Column
-    private String deadline;
+    private Long deadline;
     @Column
-    @Enumerated(EnumType.STRING)
-    private FinishedType finished;
+    private int finished;
 
     @Builder
-    public Item(String title, String content, PriorityType priority, String deadline, FinishedType finished) {
+    public Item(String title, String content, PriorityType priority, Long deadline, int finished) {
         this.title = title;
         this.content = content;
         this.priority = priority;
         this.deadline = deadline;
+//        this.finished = 0;
         this.finished = finished;
     }
 }

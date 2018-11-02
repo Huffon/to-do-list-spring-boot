@@ -3,6 +3,7 @@ package devfon.rest.controller;
 import devfon.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +30,7 @@ public class ItemController {
 
     @GetMapping("/list")
     public String list(
-            @PageableDefault Pageable pageable,
+            @PageableDefault(sort = {"deadline"}, direction = Sort.Direction.DESC) Pageable pageable,
             Model model
     ) {
         model.addAttribute("itemList", itemService.findItemList(pageable));

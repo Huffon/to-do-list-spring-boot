@@ -26,7 +26,9 @@ public class ItemRestController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getItems(@PageableDefault Pageable pageable) {
+    public ResponseEntity<?> getItems(
+            @PageableDefault Pageable pageable
+    ) {
         Page<Item> items = itemRepository.findAll(pageable);
         PageMetadata pageMetadata = new PageMetadata(pageable.getPageSize(),
                 items.getNumber(), items.getTotalElements());
