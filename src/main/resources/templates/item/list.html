@@ -42,7 +42,6 @@
                     <td th:text="${item.deadline}"></td>
                     <td th:text="${item?.finished} ? '완료' : '미완'"></td>
                     <div th:if="${item.deadline} != null and ${today} > ${item.deadline} and ${item.finished} == 0">
-                        <div th:with="count=true"></div>
                         <b><div th:text="${item.title}"></div></b>
                     </div>
                 </tr>
@@ -71,8 +70,8 @@
         </nav>
     </div>
 </div>
-<script th:if="${count} != false">
-    alert("마감 기한이 지난 할 일이 있습니다!");
-</script>
+<!--<script th:if="${count} != false">-->
+    <!--alert("마감 기한이 지난 할 일이 있습니다!");-->
+<!--</script>-->
 </body>
 </html>
