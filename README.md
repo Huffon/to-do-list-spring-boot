@@ -1,7 +1,7 @@
 ## Spring-boot를 활용한 TO-DO List
-TO-DO list 서버: 106.10.41.113:8080/item/list
+TO-DO list 서버: http://106.10.41.113:8080/item/list
 <br>
-REST API 서버: 106.10.41.113:8081/api/items
+REST API 서버: http://106.10.41.113:8081/api/items
 <br><br>
 _수업용으로 제공 받은 저용량 서버라 반응 속도가 상당히 느립니다.._
 <br>
