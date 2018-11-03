@@ -1,8 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/huffon?serverTimezone=Asia/Seoul
-    username: root
-    password: sk624853!
-    driver-class-name: com.mysql.jdbc.Driver
-server:
-  port: 8081
