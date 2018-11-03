@@ -6,21 +6,18 @@
     <link rel="stylesheet" th:href="@{/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
-<body>
+<body th:with="count=false">
 
-    <div th:replace="layout/header::header"></div>
-
-    <div class="container">
+<div th:replace="layout/header::header"></div>
+<div class="container">
+    <div th:with="today=${#dates.format(#dates.createNow(),'YYYYMMdd')}">
         <div class="page-header">
             <h2>To-do List</h2>
         </div>
         <div class="pull-right" style="width:100px; margin:10px 0;">
             <a href="/item" class="btn btn-primary btn-block">추가</a>
         </div>
-        <!--<div>-->
-            <!--<input id="today" type="hidden" th:value="${#temporals.format(today, 'yyyy-MM-dd')}"/>-->
-            <!--<td th:text="${#today}"></td>-->
-        <!--</div>-->
+        오늘은 <b th:text="${#dates.format(#dates.createNow(),'YYYY/MM/dd')}"></b> 입니다.
         <br/><br/><br/>
 
         <div id="mainHide">
@@ -36,15 +33,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="item : ${itemList}">
-                        <td th:text="${item.id}"></td>
-                        <td th:text="${item.priority.value}"></td>
-                        <td><a th:href="'/item?id='+${item.id}" th:text=
-                                "${item.title}"></a></td>
-                        <td th:text="${item.content}"></td>
-                        <td th:text="${item.deadline}"></td>
-                        <td th:text="${item?.finished} ? '완료' : '미완'"></td>
-                    </tr>
+                <tr th:each="item : ${itemList}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.priority.value}"></td>
+                    <td><a th:href="'/item?id='+${item.id}" th:text=
+                            "${item.title}"></a></td>
+                    <td th:text="${item.content}"></td>
+                    <td th:text="${item.deadline}"></td>
+                    <td th:text="${item?.finished} ? '완료' : '미완'"></td>
+                    <div th:if="${item.deadline} != null and ${today} > ${item.deadline} and ${item.finished} == 0">
+                        <div th:with="count=true"></div>
+                        <b><div th:text="${item.title}"></div></b>
+                    </div>
+                </tr>
+                <div>의 마감기한이 지났습니다 !</div>
+                <br/>
                 </tbody>
             </table>
         </div>
@@ -56,12 +59,10 @@
                 <li th:style="${itemList.first} ? 'display:none'">
                     <a th:href="@{/item/list(page=${itemList.number})}">&lsaquo;</a>
                 </li>
-
                 <li th:each="page :${#numbers.sequence(startNumber, endNumber)}"
                     th:class="(${page} == ${itemList.number}+1) ? 'active'">
                     <a th:href="@{/item/list(page=${page})}" th:text="${page}"><span class="sr-only"></span></a>
                 </li>
-
                 <li th:style="${itemList.last} ? 'display:none'">
                     <a th:href="@{/item/list(page=${itemList.number}+2)}">&rsaquo;</a>
                 </li>
@@ -69,8 +70,9 @@
             </ul>
         </nav>
     </div>
+</div>
+<script th:if="${count} != false">
+    alert("마감 기한이 지난 할 일이 있습니다!");
+</script>
 </body>
-<!--<script type="text/javascript">-->
-<!--alert("마감 기한이 지난 할 일이 있습니다!");-->
-<!--</script>-->
 </html>
