@@ -8,11 +8,13 @@
 
 ### basic set up and installation
 - kernel update
+
 ```
 sudo yum update
 ```
 
 - basic settings
+
 ```
 # user 추가
 adduser devfon
@@ -33,7 +35,9 @@ sudo localectl set-locale LANG=ko_KR.utf8
 vi .basn_profile 
 source .bash_profile
 ```
+
 - install JDK
+
 ```
 # JDK 설치
 sudo yum install java-1.8.0-openjdk-devel.x86_64
@@ -45,9 +49,11 @@ source .bash_profile
 
 # java version 확인
 javac -version
+
 ```
 
 - insatll git
+
 ```
 # 의존 패키지 설치
 yum install curl-devel expat-devel gettext-devel \
@@ -58,7 +64,17 @@ sudo yum install git
 
 # git version 확인
 git --version
+
 ```
+
+- install mysql
+
+```
+yum install mysql-server
+
+
+```
+
 
 <br><br>
 
