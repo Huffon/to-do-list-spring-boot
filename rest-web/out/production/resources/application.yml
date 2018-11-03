@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:devfon://127.0.0.1:8080/console
-    username: devfon
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://127.0.0.1:3306/huffon?serverTimezone=Asia/Seoul
+    username: root
+    password: sk624853!
+    driver-class-name: com.mysql.jdbc.Driver
 server:
   port: 8081
