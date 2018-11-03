@@ -25,7 +25,7 @@ public class ItemController {
             Model model
     ) {
         model.addAttribute("item", itemService.findItemById(id));
-        return "/item/form";
+        return "item/form";
     }
 
     @GetMapping("/list")
@@ -34,6 +34,6 @@ public class ItemController {
             Model model
     ) {
         model.addAttribute("itemList", itemService.findItemList(pageable));
-        return "/item/list";
+        return "item/list";
     }
 }

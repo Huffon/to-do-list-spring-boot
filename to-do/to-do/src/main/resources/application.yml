@@ -14,4 +14,3 @@ spring:
       path: /console
   thymeleaf:
     cache: false
-    prefix: classpath:/templates

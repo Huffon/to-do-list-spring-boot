@@ -84,7 +84,7 @@
                 deadline: $('#item_deadline').val()
              });
              $.ajax({
-                url: "http://localhost:8081/api/items",
+                url: "http://106.10.41.113:8081/api/items",
                 type: "POST",
                 data: jsonData,
                 contentType: "application/json",
@@ -109,7 +109,7 @@
                 finished: 0
              });
              $.ajax({
-                url: "http://localhost:8081/api/items/" + $('#item_id').val(),
+                url: "http://106.10.41.113:8081/api/items/" + $('#item_id').val(),
                 type: "PUT",
                 data: jsonData,
                 contentType: "application/json",
@@ -132,7 +132,7 @@
                 finished: 1
              });
              $.ajax({
-                url: "http://localhost:8081/api/items/" + $('#item_id').val(),
+                url: "http://106.10.41.113:8081/api/items/" + $('#item_id').val(),
                 type: "PUT",
                 data: jsonData,
                 contentType: "application/json",
@@ -148,7 +148,7 @@
         });
         $('#delete').click(function() {
             $.ajax({
-                url: "http://localhost:8081/api/items/" + $('#item_id').val(),
+                url: "http://106.10.41.113:8081/api/items/" + $('#item_id').val(),
                 type: "DELETE",
                 success: function() {
                     alert('삭제 성공!');
