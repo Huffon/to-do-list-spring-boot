@@ -50,7 +50,7 @@ source .bash_profile
 ```
 # JDK 설치
 sudo yum install java-1.8.0-openjdk-devel.x86_64
-rpm -qa java*jdk-devl
+rpm -qa java*jdk-devel
 
 # JAVA path 설정
 vi .bash.profile
@@ -81,7 +81,7 @@ git --version
 ```
 # mysql 설치 및 실행
 yum install mysql-server
-servcie mysqld start
+service mysqld start
 ```
 
 
